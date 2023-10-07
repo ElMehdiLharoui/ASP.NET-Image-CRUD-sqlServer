@@ -1,0 +1,43 @@
+﻿@page "{searchString?}"
+@model web.netRazorPage.Pages.Personne.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<form method="get">
+    <div class="row">
+        <div class="col">
+            <div class="input-group">
+                <input type="text" name="searchString" placeholder="Rechercher par nom" class="form-control">
+                <div class="input-group-append">
+                    <button type="submit" class="btn btn-primary">Rechercher</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+<div class="row">
+    @foreach (var item in Model.Personne)
+    {
+        <div class="col-md-4 mb-3">
+            <div class="card">
+                <img src="@item.ImageUrl" class="card-img-top" alt="Image de la personne" style="max-height: 200px;">
+                <div class="card-body">
+                    <h5 class="card-title">@item.nom</h5>
+                    <p class="card-text">@item.prenom</p>
+                    <a asp-page="./Edit" asp-route-id="@item.id" class="btn btn-primary">Edit</a>
+                    <a asp-page="./Details" asp-route-id="@item.id" class="btn btn-info">Details</a>
+                    <a asp-page="./Delete" asp-route-id="@item.id" class="btn btn-danger">Delete</a>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
